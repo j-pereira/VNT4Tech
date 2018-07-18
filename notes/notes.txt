@@ -1,0 +1,28 @@
+
+Notas sobre as aulas:
+
+--> Aula 1:
+Jetbrains: organização que publica IDE`s
+
+Projeto: VJobs -> CRUD
+MOCK -> Referência visual para o desenvolvimento, desenho
+
+
+
+--> Aula 2:
+Node: plataforma para rodar javascript no servidor (não é framework nem biblioteca)
+Requisições rest (https): verbos get, post, put, delete.
+
+Comandos:
+npm install <name module>
+
+JSON: 
+Javascript object manager notation
+Simplificar comunicação entre linguagens
+
+npm i -s  = npm install -save
+O express já tem http dentro dele
+
+-s é para salvar dependencias do Projeto, o que o projeto não precisa para rodar, não precisa do -s
+
+nodemon para não precisar subir o servidor a cada alteração
