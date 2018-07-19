@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/j-pereira/4Tech#readme",
   "dependencies": {
+    "consign": "^0.1.6",
     "express": "4.16.3"
   }
 }

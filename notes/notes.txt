@@ -26,3 +26,58 @@ O express já tem http dentro dele
 -s é para salvar dependencias do Projeto, o que o projeto não precisa para rodar, não precisa do -s
 
 nodemon para não precisar subir o servidor a cada alteração
+
+
+--> Aula 3:
+ES6: Nome oficial do Javascript
+Desenvolvendo para web, quais elementos os navegadores suportam: Can I use?
+
+ES6: 
+const, let e var
+Arrow function: (nome do parâmetro) => { lógica } - Mantém o escopo de fora, this se refere à classe de fora (diferente do escopo da função sem arrow func, onde o this se refere a função).
+Array functions: métodos de iteração
+Spread operator: toda cópia de objeto cria uma referência ao objeto, então quando você muda o obj copiado, acaba mudando a referência também. Usar o spread evita isso ( b = {...a})
+
+- find:
+a = [1, 2, 3]
+(3) [1, 2, 3]
+a.find(el => {return el == 2})
+2
+a.find(el => {return el == 3})
+3
+
+- map:
+a.map((pessoa, indice) => {return pessoa.posicao = indice})
+(2) [0, 1]
+a
+(2) [{…}, {…}]
+0
+:
+{nome: "Adriano", sexo: "M", posicao: 0}
+1
+:
+{nome: "Bruno", sexo: "M", posicao: 1}
+length
+:
+2
+__proto__
+:
+Array(0)
+
+- find obj:
+pessoaEncontrada = a.find(pessoa => pessoa.sexo == "M")
+{nome: "Adriano", sexo: "M", posicao: 0}
+
+- copying obj:
+p2 = Object.assign({}, p) -> pega o priemiro nível.
+Se fosse um array de objeto os atributos dos obj iam ficar com cópia por referência. Para isso usar a = JSON.parse(JSON.stringfy(array))
+Cópias pelo contrutor da classe cria uma nova instância.
+
+-> Firebase:
+"Criar apps melhores e desenvolver sua empresa"
+Para plataformas web e mobile. Objetivo aplicação serverless (sem o node).
+Escalável
+Uma das funcionalidades: database
+
+
+Novo tipo de for: 
