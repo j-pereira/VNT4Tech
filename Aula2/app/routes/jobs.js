@@ -20,10 +20,12 @@ module.exports = app => {
 
     app.get('/jobs/:id', async (req, res) => {
         try {
-            const docs = await jobsCollection.get();
-            let job = docs.forEach( doc => {
-                return extractJobs(doc.id == req.params.id)
-            })
+            const doc = jobsCollection.doc(req.params.id);
+            let job = await doc.get();
+
+            console.log(job);
+            return res.send(extractedJob(job));
+    
             /*
             .then((snapshot) => {
                 snapshot.forEach((doc) => {
@@ -33,11 +35,8 @@ module.exports = app => {
             */
 
         } catch (error) {
-            return res.status(500).send('error');
+            return res.status(500).send('errooooor');
         }
-        const id = req.params.id;
-        let job = jobs.find(job => {return job.id == id})
-        res.send(job);
     });
 
     app.post('/jobs', async (req, res) => {
@@ -53,33 +52,7 @@ module.exports = app => {
         }
     });
 
-    
-    /*
-    app.get('/jobs/:id', async (req, res) => {
-        const id = req.params.id;
-        let job = jobs.find(job => {return job.id == id})
-        res.send(job);
-    });
-    */
 
-    //app.get('/jobs', async (req, res) => {
-    //    return res.send(jobs);
-    //});
-
-
-    /*
-    app.post('/jobs', async (req, res) => {
-        try {
-            let jobsLength = jobs.length;
-            let job = createJob(req.body);
-            jobs.push(job);
-            if (jobs.length > jobsLength) return res.send('Added');
-            return res.status(500).send('Internal error');
-        } catch (error) {
-            return res.status(500).send('Internal error');
-        }
-    });
-    */
 
     app.put('/jobs/:id', async (req, res) => {
         try {

@@ -80,6 +80,40 @@ Escalável
 Uma das funcionalidades: database
 
 
+NODE: arquivo jobs.js em routes usando dados do arquivo JSON
+  app.get('/jobs/:id', async (req, res) => {
+      const id = req.params.id;
+      let job = jobs.find(job => {return job.id == id})
+      res.send(job);
+  });
+  */
+
+  //app.get('/jobs', async (req, res) => {
+  //    return res.send(jobs);
+  //});
+
+
+  /*
+  app.post('/jobs', async (req, res) => {
+      try {
+          let jobsLength = jobs.length;
+          let job = createJob(req.body);
+          jobs.push(job);
+          if (jobs.length > jobsLength) return res.send('Added');
+          return res.status(500).send('Internal error');
+      } catch (error) {
+          return res.status(500).send('Internal error');
+      }
+  });
+
+
+
+
+
+
+
+
+
 --> Aula 4:
 Framework JS: um framework contém várias bibliotecas
 Grannt, gup, uglyfy -> automatizador de tarefas
