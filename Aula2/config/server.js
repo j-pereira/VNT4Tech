@@ -9,6 +9,7 @@ server.use(bodyParser.urlencoded({ extended : false }));
 server.use(bodyParser.json());                                     
 
 consign()
+    .include('./config/firebase.js')
     .include('./app/routes')
     .into(server);
 

@@ -1,5 +1,7 @@
 'use strict'
 
+const express = require('express');
+const server = express();
 const app = require('./config/server');
 const port = 3000;
 

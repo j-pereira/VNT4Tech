@@ -80,4 +80,102 @@ Escalável
 Uma das funcionalidades: database
 
 
-Novo tipo de for: 
+--> Aula 4:
+Framework JS: um framework contém várias bibliotecas
+Grannt, gup, uglyfy -> automatizador de tarefas
+10 javascript frameworks: angular, react, vue
+Elementos semânticos html
+
+Single page application: 
+seo n, tam.req n/y, reuso y, perf y
+Multi page application: 
+seo y, tam.req y, reuso n, perf n
+
+
+React: 
+Declarative, component-based, learn once, write anywhere
+Virtual DOM
+jsx forma de escrever html em javascript
+
+function Pessoa(props) {
+  return (
+    <div>
+      <h1>{props.nome}</h1>
+      <p>Idade: {props.idade}</p>
+    </div>
+  )
+}
+
+const app = (
+  <div>
+    <Pessoa nome="Adiano" idade="27"></Pessoa>
+    <Pessoa nome="João" idade="28"></Pessoa>
+  </div> 
+)
+
+ReactDOM.render(app, document.querySelector("#app"));
+
+html:
+<div id="app"></div>
+
+-----------------------------------
+function Image (props) {
+  return (
+    <img className="card-img-top" src={props.src}/>
+  )
+}
+
+function Title (props) {
+  return (
+    <h5 className="card-title">{props.name}</h5>
+  )
+}
+
+function Description (props) {
+  return (
+    <p className="card-text">{props.text}</p>
+  )
+}
+
+function Salary (props) {
+  return (
+    <p>
+      <strong>Salário base:</strong>
+      <br/>{props.value}
+    </p>
+  )
+}
+
+function Button (props) {
+  return (
+    <a href="#" className={props.styleClass}><Icon icon={props.icon}></Icon></a>
+  )
+}
+
+function Icon (props) {
+  return (
+    <i className={props.icon}></i>
+  )
+}
+
+const card = (
+  <div className="col-md-3">
+    <div className="card mb-3">
+      <Image src="https://goo.gl/JT9QCG"></Image>
+        <div className="card-body">
+          <Title name="Desenvolvedor Front-End Jr"></Title>
+          <Description text="Some quick example text to build on the card title and make up the bulk of the card's content."></Description>
+          <Salary value="R$100,00"></Salary>
+          <Button styleClass="btn btn-warning" icon="fas fa-edit"></Button>
+          <Button styleClass="btn btn-danger" icon="fas fa-trash-alt"></Button>
+        </div>
+      </div>
+    </div>
+)
+
+      
+ReactDOM.render(card, document.querySelector("#card"));
+
+
+HTML: <div id="card"></div>
+------------------------------------
