@@ -213,3 +213,53 @@ ReactDOM.render(card, document.querySelector("#card"));
 
 HTML: <div id="card"></div>
 ------------------------------------
+
+
+
+
+--> Aula sábado:
+react create app -> biblioteca do node
+cli, client para facilitar instalação e configuração inicial do react
+pwa -> web apps
+
+
+
+Tudo que vá fazer no react é reutilizando componentes
+Componentes recebem entradas props e retornam elementos do react, que descreve o que vai aparecer na tela
+Componentes são peças reutilizáveis e parametrizáveis 
+CSS models é a separação de escopo do CSS
+Ao importar, qundo colocar só o nome, ele vai interpretar como pacote. Quando coloco "./", ele vai procurar o arquivo.
+E quando não colocar a extensão, vai procurar sempre .js
+
+Uma função precisa retornar algo, mas uma arrow func não precisa da palavra return, então omitindo o return não precisa dos {}
+O export default fala que o ue aquele arquivo vai exportar por default é p nome daquela função. No caso o export default da classe Header é a função header
+Base da aplicação é o src
+Para imagens, não funciona o "./", que começa da pasta em que eu ESTOU
+
+STATE
+Como um snapshot do componente
+Cada componente possui um componente
+Ativa método chamado de render
+Atualizar um state é preciso usar o setState()
+
+
+PROPS
+Configuração do componêntes, parâmetros
+Props são enviadas do componente pai pro filho (os parâmetros são passados do comp pai pro filho)
+
+Dois tipos de componentes:
+statefull: tem state e props 
+stateless: tem apenas props, apenas exibem informações
+
+Passar uma função como parâmetro faz ela executar de cara
+Para chamadas a um servidor, é preciso estar dentro de um statefull component
+setState mergeia o objeto, ao invés de sobrescrever
+
+Ciclo de vida:
+Executa métodos em determinados momentos:
+- Inicialização
+- Montagem do componente
+- Atualização
+- Desmonte do componente
+
+

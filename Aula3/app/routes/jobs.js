@@ -20,11 +20,15 @@ module.exports = app => {
 
     app.get('/jobs/:id', async (req, res) => {
         try {
-            const doc = jobsCollection.doc(req.params.id);
-            let job = await doc.get();
+            const jobsDoc = app. config.firebase.collection('jobs').doc(req.params.id);
 
-            console.log(job);
-            return res.send(extractedJob(job));
+            //const docs = await jobsCollection.get();
+            //const doc = jobsCollection.doc(req.params.id);
+            //let job = await doc.get();
+            
+            const doc = await jobsDoc.get();
+            //console.log(job);
+            return res.send(extractedJob(doc));
     
             /*
             .then((snapshot) => {
