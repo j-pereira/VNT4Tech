@@ -263,3 +263,15 @@ Executa métodos em determinados momentos:
 - Desmonte do componente
 
 
+Para chamar uma tag dentro da outra ela sempre precisa ser children (?)
+
+
+Na arrow function, se eu quiser omitir o "return", ao invés da {}, usar diretamente o ()
+
+Se eu quiser mudar dinamicamente alguma informação na tela, usar o state.
+Se for apenas read only, usar o props
+State só pode ser modificado quando o componente já existe (não pode no construtor)
+
+Arrow func quando recebe nenhum parametro, precisa colocar () vazio
+
+

@@ -20,23 +20,12 @@ module.exports = app => {
 
     app.get('/jobs/:id', async (req, res) => {
         try {
-            const jobsDoc = app. config.firebase.collection('jobs').doc(req.params.id);
-
-            //const docs = await jobsCollection.get();
-            //const doc = jobsCollection.doc(req.params.id);
-            //let job = await doc.get();
-            
-            const doc = await jobsDoc.get();
-            //console.log(job);
-            return res.send(extractedJob(doc));
-    
-            /*
-            .then((snapshot) => {
-                snapshot.forEach((doc) => {
-                    console.log(doc.id, '=>', doc.data());
-                });
-            });
-            */
+            const doc = await jobsCollection.doc(req.params.id).get();
+            if (doc) {
+                return res.send(extractJob(doc));
+            } else {
+                throw Error;
+            }
 
         } catch (error) {
             return res.status(500).send('errooooor');
@@ -45,14 +34,24 @@ module.exports = app => {
 
     app.post('/jobs', async (req, res) => {
         try {
-            const fbReturn = await jobsCollection.doc().set(req.body);
+            let job = {
+                "name": req.body.name, 
+                "salary": req.body.salary,
+                "area": req.body.area,
+                "description": req.body.description,
+                "skills": req.body.skills,
+                "differentials": req.body.differentials,
+                "isPcd": req.body.isPcd,
+                "isActive": req.body.isActive
+            }
+            const fbReturn = await jobsCollection.add(job);
             if (fbReturn) {
-                return res.send('Adicionado com sucesso!');
+                return res.send(`Vaga ${fbReturn.id} adicionada com sucesso!`);
             } else {
                 throw Error;
             }
         } catch (error) {
-            return res.status(500).send(error);
+            return res.status(500).send(error);        
         }
     });
 
@@ -79,10 +78,12 @@ module.exports = app => {
 
     app.delete('/jobs/:id', (req, res) => {
         try {
-            let length = jobs.length;
-            jobs.splice(jobs.findIndex(el => el.id === req.params.id), 1);
-            if (jobs.length < length) return res.send(`A job com o id ${req.params.id} com successo`);
-            else return res.status(500).send(`Não foi possível deletar a job ${req.params.id}`);
+            const deletedJob = jobsCollection.doc(req.params.id).delete();
+            if (deletedJob) {
+                return res.send(`Vaga ${req.params.id} foi apagada com successo`);
+            } else {
+                throw Error;
+            }
         } catch (error) {
             return res.status(500).send(error);        
         }
@@ -93,8 +94,10 @@ module.exports = app => {
         return {
             id: job.id,
             name: v.name,
+            salary: v.salary,
             description: v.description,
             skills: v.skills,
+            area: v.area,
             differentials: v.differentials,
             isPcd: v.isPcd,
             isActive: v.isActive
