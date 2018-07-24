@@ -1,55 +1,115 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
+
+class JobForm extends Component {
+
+    state = {
+        newJob: {}
+    }
 
 
-const jobForm = () => {
+    postDataHandler = (event) => {
+        let newJob = {
+            ...this.state.newJob
+        };
 
-    return (
+        axios.post('/jobs/', newJob)
+            .then((response) => {
+                newJob.id = response.data;
+                this.props.addJobToList(newJob);
+            })
+            .catch(() => {
 
-        <form>
-            <div className="form-group">
-                <label for="exampleInputEmail1">Nome</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" />
-            </div>
-            <div className="form-group">
-                <label for="exampleFormControlTextarea1">Descrição</label>
-                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div className="form-row">
-                <div className="col form-group ">
-                    <label for="exampleFormControlTextarea1">Habilidades necessárias</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            });
+        event.preventDefault();
+        event
+
+    }
+
+    changeValueHandler = (attributeName, value) => {
+        let currentJob = this.state.newJob;
+        currentJob[attributeName] = value;
+        this.setState({ newJob: currentJob });
+    }
+
+    render() {
+
+        return (
+            <form>
+                <div className="form-group">
+                    <label for="Name">Nome</label>
+                    <input 
+                        id="name"
+                        onChange={(event) => {this.changeValueHandler('name', event.target.value)}} 
+                        type="text" 
+                        className="form-control"
+                    />
                 </div>
-                <div className="col form-group">
-                    <label for="exampleFormControlTextarea1">Diferenciais</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div className="form-group">
+                    <label for="Description">Descrição</label>
+                    <textarea 
+                        id="description"
+                        onChange={(event) => {this.changeValueHandler('description', event.target.value)}} 
+                        className="form-control" 
+                        rows="3">
+                    </textarea>
                 </div>
-            </div>
-
-            <div className="form-row">
-                <div className="col form-group">
-                    <label for="exampleInputEmail1">Salário Base</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" />
+                <div className="form-row">
+                    <div className="col form-group ">
+                        <label for="Skills">Habilidades necessárias</label>
+                        <textarea 
+                            id="skills"
+                            onChange={(event) => {this.changeValueHandler('skills', event.target.value)}} 
+                            className="form-control" 
+                            rows="3">
+                        </textarea>
+                    </div>
+                    <div className="col form-group">
+                        <label for="differentials">Diferenciais</label>
+                        <textarea 
+                            id="differentials"
+                            onChange={(event) => {this.changeValueHandler('differentials', event.target.value)}} 
+                            className="form-control" 
+                            rows="3">
+                        </textarea>
+                    </div>
                 </div>
-                <div className="col form-group">
-                    <label for="exampleInputEmail1">Área</label>
-                    <select className="custom-select">
-                        <option selected>Selecione uma área</option>
-                        <option value="1">Desenvolvimento</option>
-                        <option value="2">Designer</option>
-                        <option value="3">Testes</option>
-                    </select>
+
+                <div className="form-row">
+                    <div className="col form-group">
+                        <label for="sallary">Salário Base</label>
+                        <input 
+                            id="sallary"
+                            onChange={(event) => {this.changeValueHandler('salary', event.target.value)}} 
+                            type="sallary" 
+                            className="form-control"/>
+                    </div>
+                    <div className="col form-group">
+                        <label for="area">Área</label>
+                        <select className="custom-select" onChange={(event) => {this.changeValueHandler('area', event.target.value)}} >
+                            <option selected>Selecione uma área</option>
+                            <option value="Desenvolvimento">Desenvolvimento</option>
+                            <option value="Designer">Designer</option>
+                            <option value="Testes">Testes</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div className="form-group form-check">
-                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" for="exampleCheck1">Vaga para PCD</label>
-            </div>
-            <button type="submit" className="btn btn-success float-right">Criar vaga</button>
-            
-        </form>
+                <div className="form-group form-check">
+                    <input 
+                        id="pcd" 
+                        onChange={(event) => {this.changeValueHandler('pcd', event.target.value)}}
+                        type="checkbox" 
+                        className="form-check-input" 
+                    />
+                    <label className="form-check-label" for="exampleCheck1">Vaga para PCD</label>
+                </div>
+                <button type="submit" className="btn btn-success float-right" onClick={this.postDataHandler} >Salvar</button>          
+            </form>
+        )
+    }
 
-    )
-};
+}
 
-export default jobForm;
+
+export default JobForm;

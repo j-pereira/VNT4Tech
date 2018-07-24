@@ -274,4 +274,12 @@ State só pode ser modificado quando o componente já existe (não pode no const
 
 Arrow func quando recebe nenhum parametro, precisa colocar () vazio
 
+Na web moderna, usar diologs ao invés de windows alert ou confirm
+
+Não pode fazer nenhuma modificação diretamente num obj state, apenas pelo setState!!!
+
+Spread operator é a mesma coisa que copiar atributo a atributo de um objeto
+
+Sempre que chama o setState, ele chama o render() de novo
+
 

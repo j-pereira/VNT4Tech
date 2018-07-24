@@ -3,6 +3,8 @@ import Card from '../Card/Card';
 import jobsConfig from '../../../assets/jobs';
 import Loading from '../../navigation/Loading/Loading';
 import axios from 'axios';
+import JobForm from '../JobForm/JobForm';
+import Collapse from '../../../hoc/Collapse/Collapse';
 
 class JobList extends Component {
     
@@ -14,8 +16,13 @@ class JobList extends Component {
         super();
     }
 
-    componentDidMount() {
-        
+    addJobToList = (newItem) => {
+        let currentJobs = this.state.jobs;
+        currentJobs.push(newItem);
+        this.setState( { jobs: currentJobs } );
+    }
+
+    componentDidMount() { 
         axios.get('/jobs')  //para enviar com param, colocar '/job/' + id
             .then( response => {
                 this.setState({ jobs: response.data });
@@ -24,17 +31,18 @@ class JobList extends Component {
             .catch( error => {
                 console.error(error);
             });
-        
-        //this.setState({ jobs: jobsConfig });
 
     }
 
-    jobRemoveHandler = (id, title) => {
-        if (window.confirm(`Deseja realmente excluir a vaga ${title}?`)) {
-            axios.delete('/jobs/'+ id, {params: { id: id }})
-                .then( () => {
-                    window.alert("Excluído com sucesso");
-                    //this.state.setState(jobs);
+    jobRemoveHandler = (id, name) => {
+        if (window.confirm(`Deseja realmente excluir a vaga ${name}?`)) {
+            axios.delete(`/jobs/${id}`)
+                .then( response => {
+                    let updatedJobList = this.state.jobs;
+                    const index = updatedJobList.findIndex(job => job.id == id);
+                    updatedJobList.splice(index, 1);
+                    this.setState({ jobs: updatedJobList })
+                    window.alert(`${name} ${response.data}`);
                 })
                 .catch( error => {
                     window.alert(error);
@@ -42,8 +50,8 @@ class JobList extends Component {
         }
     } 
 
-    jobEditHandler = (id, title) => {
-        window.alert(`A vaga ${title} foi atualizada`);
+    jobEditHandler = (id, name) => {
+        window.alert(`A vaga ${name} foi atualizada`);
     }
 
 
@@ -70,8 +78,13 @@ class JobList extends Component {
         render = (this.state.jobs != undefined && this.state.jobs.length > 0) ? jobsFound : <Loading />;
 
         return (
-            <div className="row">
-                {render}
+            <div>
+                <Collapse innerText="Criar vaga">
+                    < JobForm addJobToList={this.addJobToList}/>
+                </Collapse>
+                <div className="row">
+                    {render}
+                </div>
             </div>
         )
     }

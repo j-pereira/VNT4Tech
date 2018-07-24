@@ -33,7 +33,14 @@ module.exports = app => {
     });
 
     app.post('/jobs', async (req, res) => {
-        try {
+        jobsCollection.add(req.body)
+        .then (ref => {
+            return res.send(ref.id);
+        })
+        .catch(error => {
+            return res.status(500).send(error);
+        });
+        /*try {
             let job = {
                 "name": req.body.name, 
                 "salary": req.body.salary,
@@ -44,15 +51,15 @@ module.exports = app => {
                 "isPcd": req.body.isPcd,
                 "isActive": req.body.isActive
             }
-            const fbReturn = await jobsCollection.add(job);
+            const fbReturn = jobsCollection.add(job);
             if (fbReturn) {
-                return res.send(`Vaga ${fbReturn.id} adicionada com sucesso!`);
+                return res.send(fbReturn.id);
             } else {
                 throw Error;
             }
         } catch (error) {
             return res.status(500).send(error);        
-        }
+        }*/
     });
 
 
@@ -80,7 +87,7 @@ module.exports = app => {
         try {
             const deletedJob = jobsCollection.doc(req.params.id).delete();
             if (deletedJob) {
-                return res.send(`Vaga ${req.params.id} foi apagada com successo`);
+                return res.send(`Vaga excluída com successo`);
             } else {
                 throw Error;
             }
