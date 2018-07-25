@@ -283,3 +283,18 @@ Spread operator é a mesma coisa que copiar atributo a atributo de um objeto
 Sempre que chama o setState, ele chama o render() de novo
 
 
+--> Aula 9:
+React Native:
+Código transpilado como React
+90% é javascript, 10% é nativo. O javascript osquestra os componentes nativos.
+Expo -> conjunto de bibliotecas para usar o react native 
+
+Componentes:
+3 tipos de estilo:
+View
+Image
+Text
+
+
+
+

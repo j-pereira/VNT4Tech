@@ -69,18 +69,16 @@ module.exports = app => {
             if (!req.body) {
                 return res.status(403).send('Para alterar um usuário, é necessário passar algum valor');
             }
-            let index = await jobs.findIndex(job => job.id === req.params.id);
-            if (index >= 0) {
-                Object.keys(req.body).forEach(job => {
-                    jobs[index][job] = req.body[job]
-                })
-                return res.send(`job com o id ${req.params.id} alterada com sucesso`);
+            const jobDoc = await jobsCollection.doc(req.params.id).update(req.body);
+            if (jobDoc) {
+                return res.send(`Vaga ${req.params.id} foi atualizada com sucesso!`);
+            } else {
+                return res.send(`A vaga ${req.params.id} não foi encontrada`);
             }
-            return res.send("nao foi encontrado job com esse id");
         } catch (error) {
             return res.status(500).send(error);
         }
-    });
+    })
 
 
     app.delete('/jobs/:id', (req, res) => {

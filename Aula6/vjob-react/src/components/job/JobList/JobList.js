@@ -5,11 +5,14 @@ import Loading from '../../navigation/Loading/Loading';
 import axios from 'axios';
 import JobForm from '../JobForm/JobForm';
 import Collapse from '../../../hoc/Collapse/Collapse';
+import Dialog from '../Dialog/Dialog';
 
 class JobList extends Component {
     
     state = {
-        jobs: []
+        jobs: [],
+        buttonName: "Criar vaga",
+        dialog: false 
     }
 
     constructor () { 
@@ -51,7 +54,8 @@ class JobList extends Component {
     } 
 
     jobEditHandler = (id, name) => {
-        window.alert(`A vaga ${name} foi atualizada`);
+        //window.alert(`A vaga ${name} foi atualizada`);
+        this.setState( { dialog: true });
     }
 
 
@@ -79,7 +83,7 @@ class JobList extends Component {
 
         return (
             <div>
-                <Collapse innerText="Criar vaga">
+                <Collapse innerText={this.state.buttonName}>
                     < JobForm addJobToList={this.addJobToList}/>
                 </Collapse>
                 <div className="row">
