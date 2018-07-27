@@ -38,6 +38,12 @@ class JobList extends Component {
     }
 
     jobRemoveHandler = (id, name) => {
+        const axiosConfig = {
+            headers: {
+                'Authorization': 'Bearer'+ window.localStorage.getItem('token')
+            }
+        }
+
         if (window.confirm(`Deseja realmente excluir a vaga ${name}?`)) {
             axios.delete(`/jobs/${id}`)
                 .then( response => {
@@ -48,6 +54,9 @@ class JobList extends Component {
                     window.alert(`${name} ${response.data}`);
                 })
                 .catch( error => {
+                    if (error.response.status == 401){
+                        window.alert("Não autorizado");
+                    }
                     window.alert(error);
                 });
         }

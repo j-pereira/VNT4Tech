@@ -1,6 +1,8 @@
 //let jobs = require('../../config/jobs.js');
 const Job = require('../../model/Job.js');
 
+const auth = require('../../config/security/tokenValidator');
+
 module.exports = app => {
     
     const jobsCollection = app.config.firebase.collection('jobs');
@@ -32,7 +34,9 @@ module.exports = app => {
         }
     });
 
-    app.post('/jobs', async (req, res) => {
+    app.post('/jobs', auth, async (req, res, next) => {
+        /*
+        //react
         jobsCollection.add(req.body)
         .then (ref => {
             return res.send(ref.id);
@@ -40,7 +44,8 @@ module.exports = app => {
         .catch(error => {
             return res.status(500).send(error);
         });
-        /*try {
+        */
+        try {
             let job = {
                 "name": req.body.name, 
                 "salary": req.body.salary,
@@ -48,18 +53,18 @@ module.exports = app => {
                 "description": req.body.description,
                 "skills": req.body.skills,
                 "differentials": req.body.differentials,
-                "isPcd": req.body.isPcd,
-                "isActive": req.body.isActive
+                // "isPcd": req.body.isPcd,
+                // "isActive": req.body.isActive
             }
-            const fbReturn = jobsCollection.add(job);
+            const fbReturn = await jobsCollection.add(job);
             if (fbReturn) {
-                return res.send(fbReturn.id);
+                return res.send(`Vaga ${fbReturn.id} adicionada com sucesso`);
             } else {
                 throw Error;
             }
         } catch (error) {
             return res.status(500).send(error);        
-        }*/
+        }
     });
 
 

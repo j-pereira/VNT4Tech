@@ -298,3 +298,13 @@ Text
 
 
 
+--> Aula 9:
+
+Autenticação com JWT no node
+Token validator como midelware
+
+event.target.value 
+//event, component target do evento, e value é um atributo do component input
+
+
+

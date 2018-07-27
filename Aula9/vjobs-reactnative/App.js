@@ -1,7 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList , Image } from 'react-native';
+import { getJobs } from './networking/api';
+
+const img = require('./assets/images/logo-h-vjobs.png');
 
 export default class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {jobs: [] }
+  }
+
+  componentDidMount() {
+    getJobs()
+      .then(jobs => {
+        this.setState({ jobs })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  renderHeader(){
+    return(
+      <Image style={ {margin: 16, alignSelf: 'center', source} }></Image>
+    )
+  }
 
   renderList() {
     const jobs = [
