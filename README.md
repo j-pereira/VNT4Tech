@@ -1,2 +1,2 @@
-# 4Tech
-Aplicação end-to-end usando tecnologias como Node.js e React Native em um ambiente cloud, com integração de chatbot.
+# VNT4Tech
+End-to-end VJobs application with Node.js, React.js and React Native 
