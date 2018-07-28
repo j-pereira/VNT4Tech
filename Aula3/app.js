@@ -3,11 +3,11 @@
 const express = require('express');
 const server = express();
 const app = require('./config/server');
-const port = 8080;
+const port = process.env.PORT || 3000;
 
 //server.use('/vjobs', express.static(__dirname + 'Aula2/app/static'));
 server.get('/', async (req, res) => {
-    return res.redirect(`http://localhost:${port}/vjobs/index.html`);
+    return res.redirect(`http://localhost:${port}/vjobs/`);
 });
 
 app.listen(port, () => {
